@@ -1,8 +1,9 @@
 
-def saudacoes(nome):
+def saudacoes_GUI(nome):
     import random
     frases = ["Bom dia, Meu nome é "+ nome +"Como vai voce?", "Olá", "Oi, qual sua pergunta?"]
     print(frases[random.randint(0,2)])
+
 
 def recebeTexto():
     texto = "Cliente: " + input("Cliente: ")
@@ -33,8 +34,5 @@ def buscaResposta(nome, texto):
                 conhecimento.write("\n" + "Chatbot: " + respostaUser)
                 return "Obrigado pelo comercimento"
             
-def exibeResposta(resposta, nome):
-    print(resposta.replace("Chatbot", nome))
-    if resposta == "fim":
-        return "fim"
-    return "continua"
+def exibeResposta_GUI(texto, resposta, nome):
+    return resposta.replace("Chatbot", nome)
