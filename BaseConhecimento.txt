@@ -8,3 +8,4 @@ Chatbot: Mudkip- Tipo agua, Torchic- tipo fogo, Trecko- tipo grama
 
 Cliente: Iniciais da primeira geracao
 Chatbot: Squirtle, charmander e bulbasaur
+: 

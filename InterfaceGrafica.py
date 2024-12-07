@@ -40,7 +40,8 @@ def roda_Chatbot():
 
     if entrada_nome_usuario:
         nome_usuario = e_mensagem.get()
-        saudacao = pc.saudacoes_GUI(nome_maquina)
+        # Atualização aqui
+        saudacao = pc.saudacoes_GUI(nome_maquina) or "Olá, bem-vindo!"
         historico_conversa = nome_maquina + ":" + saudacao + "\n"
         v.set(historico_conversa)
         entrada_nome_usuario = False
@@ -55,7 +56,8 @@ def roda_Chatbot():
             historico_conversa += "\n Agora aprendi! obrigado compade... \n"
             v.set(historico_conversa)
         else:
-            resposta = pc.buscaResposta_GUI("Cliente: "+ texto +"\n")
+            # Atualização aqui
+            resposta = pc.buscaResposta(nome_usuario, texto)
             if resposta == "Me desculpe, nao sei oque falar":
                 historico_conversa += "Oque voce esperava? \n"
                 v.set(historico_conversa)
@@ -63,6 +65,7 @@ def roda_Chatbot():
             else:
                 historico_conversa += "\n" + pc.exibeResposta_GUI(texto, resposta, nome_maquina)
                 v.set(historico_conversa)
+
 
 Button(frame, text= "Clique", command=roda_Chatbot).grid(row=0, column=2)
 

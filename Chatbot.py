@@ -15,24 +15,43 @@ def recebeTexto():
         return texto
     
 def buscaResposta(nome, texto):
-    with open("BaseConhecimento.txt", "+a") as conhecimento:
+    with open("BaseConhecimento.txt", "a+") as conhecimento:
         conhecimento.seek(0)
         while True:
-            viu = conhecimento.readline()
-            if viu != "":
-                if texto.replace("Cliente:", "") == "Tchau":
-                    print(nome + "Volte sempre!")
-                    return "fim"
-                elif viu.strip() == texto.strip():
-                    proximaLinha = conhecimento.readline()
-                    if "Chatbot: " in proximaLinha:
-                        return proximaLinha
+            linha = conhecimento.readline()
+            if linha != "":
+                if jaccard(texto, linha) > 0.3:
+                    proxima_linha = conhecimento.readline()
+                    if "Chatbot: " in proxima_linha:
+                        return proxima_linha.strip()
             else:
-                print("Me desculpe, nao sei oque falar")
-                conhecimento.write("\n" + texto)
-                respostaUser = input("O que esperava? \n")
-                conhecimento.write("\n" + "Chatbot: " + respostaUser)
-                return "Obrigado pelo comercimento"
+                conhecimento.write(f"\n{nome}: {texto}")
+                return "Me desculpe, não sei o que falar"
+
+                
+
             
 def exibeResposta_GUI(texto, resposta, nome):
     return resposta.replace("Chatbot", nome)
+
+def salva_sugestao(sugestao):
+    with open("BaseConhecimento.txt", "+a") as conhecimento:
+        conhecimento.write("Chatbot: " + sugestao + "\n")
+
+def jaccard(textoUsuario, textoBase):
+    textoUsuario = limpa_frase(textoUsuario)
+    textoBase = limpa_frase(textoBase)
+    if len(textoBase)<1: return 0
+    else:
+        palavra_em_comum = 0
+        for palavra in textoUsuario.split():
+            if palavra in textoBase.split():
+                palavra_em_comum += 1
+        return palavra_em_comum/(len(textoBase.split()))
+    
+def limpa_frase(frase):
+    tirar = [ "?", "!", "...", ".", ":", ",", "Cliente: ", "\n"]
+    for t in tirar:
+        frase = frase.replace(t, "")
+    frase = frase.upper()
+    return frase
