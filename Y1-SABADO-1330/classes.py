@@ -74,13 +74,3 @@
 #         break
 
 #-----------------------------------------------------------
-
-class terreno:
-    def __init__(self, altura, base, custoMetro):
-        self.altura = altura
-        self.base = base
-        self.custoMetro = custoMetro
-
-    def calculaArea(self):
-
-    def calcularCusto(self):
