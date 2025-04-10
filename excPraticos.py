@@ -10,10 +10,10 @@ primeiroNumero = 0
 segundoNumero = 1
 sequenciaFibonacci = [primeiroNumero, segundoNumero]
 
-for indice in range(2,46):
+for indice in range(2,100000):
     proximoNumero = primeiroNumero + segundoNumero
     primeiroNumero = segundoNumero
-    segundoNumero = primeiroNumero 
+    segundoNumero = proximoNumero
     sequenciaFibonacci.append(proximoNumero)
 
 quantidadeTermos = int(input("Digite a quantidade de termos"))
